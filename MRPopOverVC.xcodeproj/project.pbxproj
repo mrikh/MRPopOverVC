@@ -14,6 +14,7 @@
 		46677C9C1DC122E6000E3AFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46677C9A1DC122E6000E3AFD /* Main.storyboard */; };
 		46677C9E1DC122E6000E3AFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46677C9D1DC122E6000E3AFD /* Assets.xcassets */; };
 		46677CA11DC122E6000E3AFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46677C9F1DC122E6000E3AFD /* LaunchScreen.storyboard */; };
+		46D460341DC52D590052CD2C /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D460331DC52D590052CD2C /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		46677C9D1DC122E6000E3AFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46677CA01DC122E6000E3AFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		46677CA21DC122E6000E3AFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		46D460321DC52D590052CD2C /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		46D460331DC52D590052CD2C /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,8 @@
 				46677C9F1DC122E6000E3AFD /* LaunchScreen.storyboard */,
 				46677CA21DC122E6000E3AFD /* Info.plist */,
 				46677C911DC122E6000E3AFD /* Supporting Files */,
+				46D460321DC52D590052CD2C /* TableViewController.h */,
+				46D460331DC52D590052CD2C /* TableViewController.m */,
 			);
 			path = MRPopOverVC;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				4603B6121DC128A300E12779 /* MRPopOver.m in Sources */,
 				46677C991DC122E6000E3AFD /* ViewController.m in Sources */,
 				46677C961DC122E6000E3AFD /* AppDelegate.m in Sources */,
+				46D460341DC52D590052CD2C /* TableViewController.m in Sources */,
 				46677C931DC122E6000E3AFD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

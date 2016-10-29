@@ -10,12 +10,24 @@
 
 @interface MRPopOver : UIView
 
-@property (strong, nonatomic) UIColor *borderColor;
+@property (strong, nonatomic) UIColor *trianglePopUpColor;
 
-@property (strong, nonatomic) UIColor *backgroundColor;
+@property (strong, nonatomic) UIColor *colorOfBorder;
+
+@property (assign, nonatomic) BOOL showShadow;
 
 @property (assign, nonatomic) CGFloat borderWidth;
 
--(instancetype)initWithViewController:(UIViewController *)viewController fromView:(UIView *)view;
+@property (assign, nonatomic) CGFloat cornerRadiusForPopOver;
+
+@property (assign, nonatomic) CGFloat leftSideInset;
+
+@property (assign, nonatomic) CGFloat rightSideInset;
+
+@property (assign, nonatomic) CGFloat topSideInset;
+
+@property (assign, nonatomic) CGFloat bottomSideInset;
+
+-(void)createViewController:(UIViewController *)viewController fromView:(UIView *)fromView;
 
 @end
