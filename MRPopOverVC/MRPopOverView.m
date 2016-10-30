@@ -51,6 +51,8 @@
     
     UILabel *textLabel = [self createLabelWithString:text nearView:triangleView andShowOnTop:showOnTopPartOfScreen andFont:font];
     
+    [self modifyLabelFrameAsRequiredOfLabel:textLabel];
+    
     [self addSubview:triangleView];
     [self addSubview:textLabel];
 }
@@ -83,7 +85,6 @@
         
     }
         
-        
     UILabel *mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(triangleView.frame.origin.x - triangleView.frame.size.width/2, yCoordinate, stringSize.width + buffer, stringSize.height)];
     
     [mainLabel setBackgroundColor:self.labelBackgroundColor];
@@ -93,6 +94,8 @@
     [mainLabel.layer setBorderColor: self.textBorderColor.CGColor];
     [mainLabel.layer setBorderWidth:self.labelBorderWidth];
     [mainLabel.layer setCornerRadius:5.0f];
+    [mainLabel setNumberOfLines:0];
+    [mainLabel setLineBreakMode:NSLineBreakByWordWrapping];
     [mainLabel setClipsToBounds:YES];
     [mainLabel setText:text];
     
@@ -106,6 +109,20 @@
     [self removeFromSuperview];
 }
 
-
+-(void)modifyLabelFrameAsRequiredOfLabel:(UILabel *)label{
+    
+    CGRect labelFrame = label.frame;
+    
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    
+    if(CGRectGetMaxX(labelFrame) > screenBounds.size.width){
+        
+        CGFloat minXForLabel = MAX(0,label.frame.origin.x - (CGRectGetMaxX(labelFrame)-screenBounds.size.width));
+        
+        [label setFrame:CGRectMake(minXForLabel, labelFrame.origin.y, labelFrame.size.width, labelFrame.size.height)];
+        
+    }
+    
+}
 
 @end
