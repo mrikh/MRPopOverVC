@@ -57,8 +57,6 @@
     [self addSubview:textLabel];
 }
 
-#define buffer 5.0f
-
 -(UILabel *)createLabelWithString:(NSString *)text nearView:(UIView *)triangleView andShowOnTop:(BOOL)showOnTop andFont:(UIFont *)font{
     
     UIFont *fontToUse;
@@ -85,7 +83,7 @@
         
     }
         
-    UILabel *mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(triangleView.frame.origin.x - triangleView.frame.size.width/2, yCoordinate, stringSize.width + buffer, stringSize.height)];
+    UILabel *mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(triangleView.frame.origin.x - triangleView.frame.size.width/2, yCoordinate, stringSize.width, stringSize.height)];
     
     [mainLabel setBackgroundColor:self.labelBackgroundColor];
     [mainLabel setTextAlignment:NSTextAlignmentCenter];

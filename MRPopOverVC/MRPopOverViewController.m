@@ -77,7 +77,6 @@
     [self.viewControllerToShow.view.layer setCornerRadius:self.cornerRadiusForPopOver];
     [mainViewControllerView setClipsToBounds:YES];
     
-    
     [mainViewControllerView addSubview:self.viewControllerToShow.view];
     
     NSDictionary *viewsDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:self.viewControllerToShow.view,@"view", nil];
