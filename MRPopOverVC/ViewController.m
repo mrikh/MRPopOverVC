@@ -6,8 +6,9 @@
 //  Copyright © 2016 Mayank Rikh. All rights reserved.
 //
 
+#import "MRPopOverViewController.h"
 #import "ViewController.h"
-#import "MRPopOver.h"
+#import "MRPopOverView.h"
 
 @interface ViewController ()
 
@@ -29,35 +30,53 @@
 
 - (IBAction)buttonAction:(UIButton *)sender {
     
+    /*
+    
     UITableViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"table"];
     
-    MRPopOver *view = [[MRPopOver alloc] init];
+    MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] init];
     
-    view.trianglePopUpColor = [UIColor blackColor];
+    viewControllerNew.senderView = sender;
     
-    view.colorOfBorder = [UIColor blackColor];
+    viewControllerNew.viewControllerToShow = viewController;
     
-    view.borderWidth = 5.0f;
+    viewControllerNew.trianglePopUpColor = [UIColor blackColor];
     
-    view.showShadow = YES;
+    viewControllerNew.colorOfBorder = [UIColor blackColor];
     
-    view.cornerRadiusForPopOver = 5.0f;
+    viewControllerNew.borderWidth = 5.0f;
     
-    view.leftSideInset = 5.0f;
+    viewControllerNew.showShadow = YES;
     
-    view.bottomSideInset = 5.0f;
+    viewControllerNew.cornerRadiusForPopOver = 5.0f;
     
-    view.topSideInset = 5.0f;
+    viewControllerNew.leftSideInset = 5.0f;
     
-    view.rightSideInset = 5.0f;
+    viewControllerNew.bottomSideInset = 5.0f;
     
-    [view createViewController:viewController fromView:sender];
+    viewControllerNew.topSideInset = 5.0f;
     
-    [self addChildViewController:viewController];
+    viewControllerNew.rightSideInset = 5.0f;
     
-    [viewController didMoveToParentViewController:self];
+    [viewControllerNew setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     
-    [self.view addSubview:view];
+    [self presentViewController:viewControllerNew animated:YES completion:nil];
+    
+     */
+    
+    MRPopOverView *labelView = [[MRPopOverView alloc] init];
+    
+    labelView.labelBorderWidth = 0.0f;
+    
+    labelView.labelTextColor = [UIColor whiteColor];
+    
+    labelView.textBorderColor = [UIColor blueColor];
+    
+    labelView.labelBackgroundColor = [UIColor blueColor];
+    
+    [labelView createInfoBelowView:sender withString:@"Heyyyyyy! How ya doin?" andFont:nil];
+    
+    [self.view addSubview:labelView];
 }
 
 @end

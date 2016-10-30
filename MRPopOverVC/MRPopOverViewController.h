@@ -1,14 +1,18 @@
 //
-//  MRPopOver.h
+//  MRPopOverViewController.h
 //  MRPopOverVC
 //
-//  Created by Mayank Rikh on 26/10/16.
+//  Created by Mayank Rikh on 30/10/16.
 //  Copyright © 2016 Mayank Rikh. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface MRPopOver : UIView
+@interface MRPopOverViewController : UIViewController
+
+@property (strong, nonatomic) UIViewController *viewControllerToShow;
+
+@property (strong, nonatomic) UIView *senderView;
 
 @property (strong, nonatomic) UIColor *trianglePopUpColor;
 
@@ -28,6 +32,5 @@
 
 @property (assign, nonatomic) CGFloat bottomSideInset;
 
--(void)createViewController:(UIViewController *)viewController fromView:(UIView *)fromView;
 
 @end
