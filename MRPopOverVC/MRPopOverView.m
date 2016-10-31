@@ -108,6 +108,8 @@
 
 #pragma mark - Private Functions
 
+#define buffer 8.0f
+
 -(UILabel *)createLabelWithString:(NSString *)text nearView:(UIView *)triangleView andShowOnTop:(BOOL)showOnTop andFont:(UIFont *)font{
     
     UIFont *fontToUse;
@@ -134,7 +136,7 @@
         
     }
         
-    UILabel *mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(triangleView.frame.origin.x - triangleView.frame.size.width/2, yCoordinate, stringSize.width, stringSize.height)];
+    UILabel *mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(triangleView.frame.origin.x - triangleView.frame.size.width/2 - buffer, yCoordinate, stringSize.width, stringSize.height)];
     
     [mainLabel setBackgroundColor:self.labelBackgroundColor];
     [mainLabel setTextAlignment:NSTextAlignmentCenter];
@@ -166,8 +168,6 @@
         [label setFrame:CGRectMake(minXForLabel, labelFrame.origin.y, labelFrame.size.width, labelFrame.size.height)];
     }
 }
-
-
 
 -(void)handleTap:(UITapGestureRecognizer *)gestureRecognizer{
     
