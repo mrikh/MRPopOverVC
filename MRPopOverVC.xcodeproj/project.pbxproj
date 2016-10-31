@@ -16,6 +16,7 @@
 		46716CD41DC5E95D00BA896D /* MRTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46716CD31DC5E95D00BA896D /* MRTriangleView.m */; };
 		46716CD71DC5ECAE00BA896D /* MRPopOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46716CD61DC5ECAE00BA896D /* MRPopOverViewController.m */; };
 		46716CDA1DC6165300BA896D /* MRPopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46716CD91DC6165300BA896D /* MRPopOverView.m */; };
+		46AB6F161DC77B67001485BE /* MRPopOverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB6F151DC77B67001485BE /* MRPopOverModel.m */; };
 		46D460341DC52D590052CD2C /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D460331DC52D590052CD2C /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,8 @@
 		46716CD61DC5ECAE00BA896D /* MRPopOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRPopOverViewController.m; sourceTree = "<group>"; };
 		46716CD81DC6165300BA896D /* MRPopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRPopOverView.h; sourceTree = "<group>"; };
 		46716CD91DC6165300BA896D /* MRPopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRPopOverView.m; sourceTree = "<group>"; };
+		46AB6F141DC77B67001485BE /* MRPopOverModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRPopOverModel.h; sourceTree = "<group>"; };
+		46AB6F151DC77B67001485BE /* MRPopOverModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRPopOverModel.m; sourceTree = "<group>"; };
 		46D460321DC52D590052CD2C /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		46D460331DC52D590052CD2C /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +101,7 @@
 		46677CA81DC122EF000E3AFD /* MRPopOver */ = {
 			isa = PBXGroup;
 			children = (
+				46AB6F171DC77EA0001485BE /* Private Classes */,
 				46716CD21DC5E95D00BA896D /* MRTriangleView.h */,
 				46716CD31DC5E95D00BA896D /* MRTriangleView.m */,
 				46716CD81DC6165300BA896D /* MRPopOverView.h */,
@@ -107,6 +111,15 @@
 			);
 			name = MRPopOver;
 			path = MRPopOverVC;
+			sourceTree = "<group>";
+		};
+		46AB6F171DC77EA0001485BE /* Private Classes */ = {
+			isa = PBXGroup;
+			children = (
+				46AB6F141DC77B67001485BE /* MRPopOverModel.h */,
+				46AB6F151DC77B67001485BE /* MRPopOverModel.m */,
+			);
+			name = "Private Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +200,7 @@
 				46677C961DC122E6000E3AFD /* AppDelegate.m in Sources */,
 				46716CD71DC5ECAE00BA896D /* MRPopOverViewController.m in Sources */,
 				46D460341DC52D590052CD2C /* TableViewController.m in Sources */,
+				46AB6F161DC77B67001485BE /* MRPopOverModel.m in Sources */,
 				46677C931DC122E6000E3AFD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +323,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NL38PKJFTM;
 				INFOPLIST_FILE = MRPopOverVC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rikh.MRPopOverVC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -321,6 +336,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NL38PKJFTM;
 				INFOPLIST_FILE = MRPopOverVC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rikh.MRPopOverVC;
 				PRODUCT_NAME = "$(TARGET_NAME)";

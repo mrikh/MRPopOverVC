@@ -20,4 +20,6 @@
 
 -(void)createInfoBelowView:(UIView *)view withString:(NSString *)text andFont:(UIFont *)font;
 
+-(void)createInfoWithPointsAndTextDictionaryArray:(NSArray *)array andFont:(UIFont *)font;
+
 @end

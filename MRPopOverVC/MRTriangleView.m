@@ -62,4 +62,47 @@
     return self;
 }
 
+
+-(instancetype)initTriangleViewNearPoint:(CGPoint)point andShowOnTop:(BOOL)showOnTop withColor:(UIColor *)color{
+    
+    self = [super init];
+    
+    if(self){
+        
+        CGPoint firstPoint, secondPoint, thirdPoint;
+        
+        if(showOnTop){
+            
+            firstPoint = CGPointMake(triangleViewSize/2, 0);
+            secondPoint = CGPointMake(0, triangleViewSize);
+            thirdPoint = CGPointMake(triangleViewSize, triangleViewSize);
+            
+        }else{
+            
+            firstPoint = CGPointMake(triangleViewSize/2, triangleViewSize);
+            secondPoint = CGPointMake(0, 0);
+            thirdPoint = CGPointMake(triangleViewSize, 0);
+        }
+        
+        [self setFrame: CGRectMake(point.x - triangleViewSize/2, point.y, triangleViewSize, triangleViewSize)];
+        
+        [self setBackgroundColor:color];
+        
+        UIBezierPath *trianglePath = [UIBezierPath new];
+        [trianglePath moveToPoint:firstPoint];
+        [trianglePath addLineToPoint:secondPoint];
+        [trianglePath addLineToPoint:thirdPoint];
+        [trianglePath addLineToPoint:firstPoint];
+        
+        [trianglePath closePath];
+        
+        CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
+        [shapeLayer setPath:trianglePath.CGPath];
+        
+        self.layer.mask = shapeLayer;
+    }
+    
+    return self;
+}
+
 @end
