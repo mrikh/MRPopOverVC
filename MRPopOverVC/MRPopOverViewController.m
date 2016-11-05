@@ -52,7 +52,7 @@
     
     [self.viewControllerToShow.view setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    CGRect senderViewInOwnView = [self.view convertRect:fromView.frame toView:self.view];
+    CGRect senderViewInOwnView = [fromView.superview convertRect:fromView.frame toView:self.view];
     
     BOOL showOnTopPartOfScreen;
     
