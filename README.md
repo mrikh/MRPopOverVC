@@ -11,6 +11,7 @@ remaining height. If the view from which you wish to display the pop over is pre
 ![alt tag](http://i.imgur.com/WllEUy0.png) ![alt tag](http://i.imgur.com/gub8IzR.png) ![alt tag](http://i.imgur.com/mQ6X3VE.png) 
 ######Use the below code segment to show the pop over:
     
+    //instantiate whichever view controller you wish to show
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"viewControllerIdentifier"];
     
     MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] init];
