@@ -3,7 +3,7 @@
 To use this, simply download the whole project and drag and drop the MRPopOver group folder to your own project.
 There are three ways you can use this project. 
 
-**NOTE:** This does not support orientation changes. That part you will have to handle on your own. 
+**NOTE:** This does not support orientation changes. That part you will have to handle on your own. Also ensure that you create the provided pop overs **after** calling animations.
 
 ##First - Present a pop over with a view controller
 You can show a view controller from any view of that you decided. It will adjust itself to fit across the whole width and 
