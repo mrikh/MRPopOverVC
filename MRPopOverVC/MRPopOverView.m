@@ -73,7 +73,7 @@
         
         }else{
         
-            [[[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Please use array of models or array of dictionaries developer sir" delegate:nil cancelButtonTitle:@"Okay D:" otherButtonTitles:nil] show];
+            [[[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Please use array of dictionaries developer sir" delegate:nil cancelButtonTitle:@"Okay D:" otherButtonTitles:nil] show];
             
             return ;
         }

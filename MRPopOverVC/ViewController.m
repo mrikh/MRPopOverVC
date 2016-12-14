@@ -19,7 +19,6 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
 }
 
 
@@ -30,7 +29,6 @@
 
 - (IBAction)buttonAction:(UIButton *)sender {
     
-    /*
     
     UITableViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"table"];
     
@@ -40,13 +38,13 @@
     
     viewControllerNew.viewControllerToShow = viewController;
     
-    viewControllerNew.trianglePopUpColor = [UIColor blackColor];
+    viewControllerNew.trianglePopUpColor = [UIColor greenColor];
     
-    viewControllerNew.colorOfBorder = [UIColor blackColor];
+    viewControllerNew.colorOfBorder = [UIColor greenColor];
+
+    viewControllerNew.showShadow = YES;
     
     viewControllerNew.borderWidth = 5.0f;
-    
-    viewControllerNew.showShadow = YES;
     
     viewControllerNew.cornerRadiusForPopOver = 5.0f;
     
@@ -62,7 +60,12 @@
     
     [self presentViewController:viewControllerNew animated:YES completion:nil];
     
-     */
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        viewControllerNew.trianglePopUpColor = [UIColor blueColor];
+    });
+    
+     /*
     
     
     MRPopOverView *labelView = [[MRPopOverView alloc] init];
@@ -81,7 +84,7 @@
 //    [labelView createInfoWithPointsAndTextDictionaryArray:@[[[NSDictionary alloc] initWithObjectsAndKeys:@"How ya doin?Heyyyyyy!",@"text",@(sender.center.x),@"xCoordinate", @(sender.center.y), @"yCoordinate",sender.superview,@"viewToBeMadeIn",nil]] andFont:nil];
     
     [self.view addSubview:labelView];
-    
+    */
 }
 
 @end

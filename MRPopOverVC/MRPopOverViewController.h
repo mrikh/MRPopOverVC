@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MRPopOverViewControllerDelegate <NSObject>
+
+@optional
+
+-(void)userDidDismissViewController;
+
+@end
+
 @interface MRPopOverViewController : UIViewController
 
 @property (strong, nonatomic) UIViewController *viewControllerToShow;
@@ -32,5 +40,6 @@
 
 @property (assign, nonatomic) CGFloat bottomSideInset;
 
+@property (weak, nonatomic) id<MRPopOverViewControllerDelegate> delegate;
 
 @end

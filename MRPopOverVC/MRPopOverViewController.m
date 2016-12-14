@@ -9,17 +9,21 @@
 #import "MRPopOverViewController.h"
 #import "MRTriangleView.h"
 
-@interface MRPopOverViewController ()<UIGestureRecognizerDelegate>
+@interface MRPopOverViewController ()<UIGestureRecognizerDelegate>{
+    
+    UIView *triangleView, *mainView;
+    
+    UIBezierPath *shadowPath;
+}
 
 @end
 
 @implementation MRPopOverViewController
 
+
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-
-    [self.view setBackgroundColor:[UIColor clearColor]];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     
@@ -30,6 +34,18 @@
     [self addChildViewController:self.viewControllerToShow];
     
     [self.viewControllerToShow didMoveToParentViewController:self];
+    
+    [self.view setBackgroundColor:[UIColor clearColor]];
+    
+    if(!_trianglePopUpColor){
+
+        _trianglePopUpColor = [UIColor blackColor];
+    }
+    
+    if(!_colorOfBorder){
+     
+        _colorOfBorder = [UIColor blackColor];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,11 +58,11 @@
     [super viewWillAppear:animated];
     
     if([self isMovingToParentViewController] || [self isBeingPresented]){
-    
-        [self createViewControllerFromView:self.senderView];
         
+        [self createViewControllerFromView:self.senderView];
     }
 }
+
 
 -(void)createViewControllerFromView:(UIView *)fromView{
     
@@ -67,28 +83,34 @@
     
     //initially create and setup views
     
-    UIView *triangleView = [[MRTriangleView alloc] initTriangleViewNearFrame:senderViewInOwnView andShowOnTop:showOnTopPartOfScreen withColor:self.trianglePopUpColor];
+    triangleView = [[MRTriangleView alloc] initTriangleViewNearFrame:senderViewInOwnView andShowOnTop:showOnTopPartOfScreen withColor:self.trianglePopUpColor];
     
-    UIView *mainViewControllerView = [self createMainViewControllerViewCorrespondingToTriangleView:triangleView andShowOnTop:showOnTopPartOfScreen];
+    [self createMainViewControllerViewOnSide:showOnTopPartOfScreen];
     
-    [mainViewControllerView.layer setBorderWidth:self.borderWidth];
-    [mainViewControllerView.layer setBorderColor:self.colorOfBorder.CGColor];
-    [mainViewControllerView.layer setCornerRadius:self.cornerRadiusForPopOver];
+    [mainView.layer setBorderWidth:self.borderWidth];
+    
+    [mainView.layer setBorderColor:self.colorOfBorder.CGColor];
+    
+    [mainView.layer setCornerRadius:self.cornerRadiusForPopOver];
+    
     [self.viewControllerToShow.view.layer setCornerRadius:self.cornerRadiusForPopOver];
-    [mainViewControllerView setClipsToBounds:YES];
     
-    [mainViewControllerView addSubview:self.viewControllerToShow.view];
+    [mainView setClipsToBounds:YES];
+    
+    [mainView addSubview:self.viewControllerToShow.view];
     
     NSDictionary *viewsDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:self.viewControllerToShow.view,@"view", nil];
     
-    [mainViewControllerView addConstraints:[self createConstraintsWithDictionary:viewsDictionary]];
+    [mainView addConstraints:[self createConstraintsWithDictionary:viewsDictionary]];
     
     if(self.showShadow){
-        [self createShadowOnView:mainViewControllerView];
+        
+        [self createShadow];
     }
     
     [self.view addSubview:triangleView];
-    [self.view addSubview:mainViewControllerView];
+    
+    [self.view addSubview:mainView];
 }
 
 
@@ -96,38 +118,37 @@
 
 #pragma mark Create Views
 
--(UIView *)createMainViewControllerViewCorrespondingToTriangleView:(UIView *)triangleView andShowOnTop:(BOOL)showOnTop{
-    
-    UIView *actualPopOverView;
+-(void)createMainViewControllerViewOnSide:(BOOL)showOnTop{
+
     
     if(showOnTop){
         
-        actualPopOverView = [[UIView alloc] initWithFrame:CGRectMake(self.leftSideInset, triangleView.frame.origin.y + triangleView.frame.size.height, [UIScreen mainScreen].bounds.size.width - self.rightSideInset - self.leftSideInset, [UIScreen mainScreen].bounds.size.height - self.bottomSideInset - (triangleView.frame.origin.y + triangleView.frame.size.height))];
+        mainView = [[UIView alloc] initWithFrame:CGRectMake(self.leftSideInset, triangleView.frame.origin.y + triangleView.frame.size.height, [UIScreen mainScreen].bounds.size.width - self.rightSideInset - self.leftSideInset, [UIScreen mainScreen].bounds.size.height - self.bottomSideInset - (triangleView.frame.origin.y + triangleView.frame.size.height))];
         
     }else{
         
-        actualPopOverView = [[UIView alloc] initWithFrame:CGRectMake(self.leftSideInset, self.topSideInset, [UIScreen mainScreen].bounds.size.width - self.rightSideInset - self.leftSideInset, triangleView.frame.origin.y - self.topSideInset)];
+        mainView = [[UIView alloc] initWithFrame:CGRectMake(self.leftSideInset, self.topSideInset, [UIScreen mainScreen].bounds.size.width - self.rightSideInset - self.leftSideInset, triangleView.frame.origin.y - self.topSideInset)];
     }
-    
-    return actualPopOverView;
 }
 
 #pragma mark Other functions
 
--(void)createShadowOnView:(UIView *)view{
-    
-    UIBezierPath *shadowPath;
+-(void)createShadow{
     
     if(!shadowPath){
         
-        shadowPath = [UIBezierPath bezierPathWithRect:view.bounds];
+        shadowPath = [UIBezierPath bezierPathWithRect:mainView.bounds];
     }
     
-    view.layer.masksToBounds = NO;
-    view.layer.shadowColor = [UIColor blackColor].CGColor;
-    view.layer.shadowOffset = CGSizeMake(-3.0f, 3.0f);
-    view.layer.shadowOpacity = 0.5f;
-    view.layer.shadowPath = shadowPath.CGPath;
+    mainView.layer.masksToBounds = NO;
+    
+    mainView.layer.shadowColor = [UIColor blackColor].CGColor;
+    
+    mainView.layer.shadowOffset = CGSizeMake(-3.0f, 3.0f);
+    
+    mainView.layer.shadowOpacity = 0.5f;
+    
+    mainView.layer.shadowPath = shadowPath.CGPath;
     
 }
 
@@ -158,7 +179,44 @@
 
 -(void)handleTap:(UITapGestureRecognizer *)tapGesture{
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        if([self.delegate respondsToSelector:@selector(userDidDismissViewController)]){
+            
+            [self.delegate userDidDismissViewController];
+        }
+    }];
+}
+
+
+#pragma mark - Test
+
+-(void)setTrianglePopUpColor:(UIColor *)trianglePopUpColor{
+    
+    _trianglePopUpColor = trianglePopUpColor;
+    
+    [triangleView setBackgroundColor:_trianglePopUpColor];
+}
+
+-(void)setColorOfBorder:(UIColor *)colorOfBorder{
+    
+    _colorOfBorder = colorOfBorder;
+    
+    [mainView.layer setBorderColor:_colorOfBorder.CGColor];
+}
+
+-(void)setShowShadow:(BOOL)showShadow{
+    
+    _showShadow = showShadow;
+    
+    [self createShadow];
+}
+
+-(void)setBorderWidth:(CGFloat)borderWidth{
+    
+    _borderWidth = borderWidth;
+    
+    [mainView.layer setBorderWidth:_borderWidth];
 }
 
 @end
