@@ -20,6 +20,33 @@
 
 @implementation MRPopOverViewController
 
+-(instancetype)init{
+    
+    if(self = [super init]){
+        
+         _trianglePopUpColor = [UIColor blackColor];
+        
+         _colorOfBorder = [UIColor blackColor];
+        
+        _showShadow = YES;
+        
+        _borderWidth = 5.0f;
+        
+        _cornerRadiusForPopOver = 5.0f;
+        
+        _leftSideInset = 5.0f;
+        
+        _bottomSideInset = 5.0f;
+        
+        _topSideInset = 5.0f;
+        
+        _rightSideInset = 5.0f;
+        
+    }
+    
+    return self;
+}
+
 
 - (void)viewDidLoad {
 
@@ -36,16 +63,6 @@
     [self.viewControllerToShow didMoveToParentViewController:self];
     
     [self.view setBackgroundColor:[UIColor clearColor]];
-    
-    if(!_trianglePopUpColor){
-
-        _trianglePopUpColor = [UIColor blackColor];
-    }
-    
-    if(!_colorOfBorder){
-     
-        _colorOfBorder = [UIColor blackColor];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,8 +110,6 @@
     
     [mainView.layer setCornerRadius:self.cornerRadiusForPopOver];
     
-    [self.viewControllerToShow.view.layer setCornerRadius:self.cornerRadiusForPopOver];
-    
     [mainView setClipsToBounds:YES];
     
     [mainView addSubview:self.viewControllerToShow.view];
@@ -119,7 +134,6 @@
 #pragma mark Create Views
 
 -(void)createMainViewControllerViewOnSide:(BOOL)showOnTop{
-
     
     if(showOnTop){
         
