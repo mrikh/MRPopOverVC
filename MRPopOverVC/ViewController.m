@@ -49,8 +49,6 @@
     
     viewControllerNew.edgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
     
-    [viewControllerNew setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    
     [self presentViewController:viewControllerNew animated:YES completion:nil];
     
      /*

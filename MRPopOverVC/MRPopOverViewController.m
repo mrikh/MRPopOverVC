@@ -35,6 +35,8 @@
         self.cornerRadiusForPopOver = 5.0f;
         
         self.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
+        
+        [self setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     }
     
     return self;
