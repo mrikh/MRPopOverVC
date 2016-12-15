@@ -32,8 +32,6 @@ remaining height. If the view from which you wish to display the pop over is pre
     
     viewControllerNew.edgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
     
-    [viewControllerNew setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    
     [self presentViewController:viewControllerNew animated:YES completion:nil];
 
 
