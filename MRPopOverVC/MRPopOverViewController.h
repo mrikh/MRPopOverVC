@@ -32,13 +32,7 @@
 
 @property (assign, nonatomic) CGFloat cornerRadiusForPopOver;
 
-@property (assign, nonatomic) CGFloat leftSideInset;
-
-@property (assign, nonatomic) CGFloat rightSideInset;
-
-@property (assign, nonatomic) CGFloat topSideInset;
-
-@property (assign, nonatomic) CGFloat bottomSideInset;
+@property (assign, nonatomic) UIEdgeInsets edgeInsets;
 
 @property (weak, nonatomic) id<MRPopOverViewControllerDelegate> delegate;
 

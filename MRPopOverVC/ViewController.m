@@ -47,22 +47,11 @@
     
     viewControllerNew.cornerRadiusForPopOver = 5.0f;
     
-    viewControllerNew.leftSideInset = 5.0f;
-    
-    viewControllerNew.bottomSideInset = 5.0f;
-    
-    viewControllerNew.topSideInset = 5.0f;
-    
-    viewControllerNew.rightSideInset = 5.0f;
+    viewControllerNew.edgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
     
     [viewControllerNew setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     
     [self presentViewController:viewControllerNew animated:YES completion:nil];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        viewControllerNew.trianglePopUpColor = [UIColor blueColor];
-    });
     
      /*
     

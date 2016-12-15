@@ -24,24 +24,17 @@
     
     if(self = [super init]){
         
-         _trianglePopUpColor = [UIColor blackColor];
+        self.trianglePopUpColor = [UIColor blackColor];
         
-         _colorOfBorder = [UIColor blackColor];
+        self.colorOfBorder = [UIColor blackColor];
         
-        _showShadow = YES;
+        self.showShadow = YES;
         
-        _borderWidth = 5.0f;
+        self.borderWidth = 5.0f;
         
-        _cornerRadiusForPopOver = 5.0f;
+        self.cornerRadiusForPopOver = 5.0f;
         
-        _leftSideInset = 5.0f;
-        
-        _bottomSideInset = 5.0f;
-        
-        _topSideInset = 5.0f;
-        
-        _rightSideInset = 5.0f;
-        
+        self.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
     }
     
     return self;
@@ -49,7 +42,7 @@
 
 
 - (void)viewDidLoad {
-
+    
     [super viewDidLoad];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -87,36 +80,13 @@
     
     CGRect senderViewInOwnView = [fromView.superview convertRect:fromView.frame toView:self.view];
     
-    BOOL showOnTopPartOfScreen;
-    
-    if(senderViewInOwnView.origin.y < self.view.frame.size.height/2){
-        
-        showOnTopPartOfScreen = YES;
-        
-    }else{
-        
-        showOnTopPartOfScreen = NO;
-    }
+    BOOL showOnTopPartOfScreen = senderViewInOwnView.origin.y < self.view.frame.size.height/2;
     
     //initially create and setup views
     
     triangleView = [[MRTriangleView alloc] initTriangleViewNearFrame:senderViewInOwnView andShowOnTop:showOnTopPartOfScreen withColor:self.trianglePopUpColor];
     
     [self createMainViewControllerViewOnSide:showOnTopPartOfScreen];
-    
-    [mainView.layer setBorderWidth:self.borderWidth];
-    
-    [mainView.layer setBorderColor:self.colorOfBorder.CGColor];
-    
-    [mainView.layer setCornerRadius:self.cornerRadiusForPopOver];
-    
-    [mainView setClipsToBounds:YES];
-    
-    [mainView addSubview:self.viewControllerToShow.view];
-    
-    NSDictionary *viewsDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:self.viewControllerToShow.view,@"view", nil];
-    
-    [mainView addConstraints:[self createConstraintsWithDictionary:viewsDictionary]];
     
     if(self.showShadow){
         
@@ -137,12 +107,25 @@
     
     if(showOnTop){
         
-        mainView = [[UIView alloc] initWithFrame:CGRectMake(self.leftSideInset, triangleView.frame.origin.y + triangleView.frame.size.height, [UIScreen mainScreen].bounds.size.width - self.rightSideInset - self.leftSideInset, [UIScreen mainScreen].bounds.size.height - self.bottomSideInset - (triangleView.frame.origin.y + triangleView.frame.size.height))];
+        mainView = [[UIView alloc] initWithFrame:CGRectMake(self.edgeInsets.left, triangleView.frame.origin.y + triangleView.frame.size.height, [UIScreen mainScreen].bounds.size.width - self.edgeInsets.right - self.edgeInsets.left, [UIScreen mainScreen].bounds.size.height - self.edgeInsets.bottom - (triangleView.frame.origin.y + triangleView.frame.size.height))];
         
     }else{
         
-        mainView = [[UIView alloc] initWithFrame:CGRectMake(self.leftSideInset, self.topSideInset, [UIScreen mainScreen].bounds.size.width - self.rightSideInset - self.leftSideInset, triangleView.frame.origin.y - self.topSideInset)];
+        mainView = [[UIView alloc] initWithFrame:CGRectMake(self.edgeInsets.left, self.edgeInsets.top, [UIScreen mainScreen].bounds.size.width - self.edgeInsets.right - self.edgeInsets.left, triangleView.frame.origin.y - self.edgeInsets.top)];
     }
+    
+    [mainView.layer setBorderWidth:self.borderWidth];
+    
+    [mainView.layer setBorderColor:self.colorOfBorder.CGColor];
+    
+    [mainView.layer setCornerRadius:self.cornerRadiusForPopOver];
+    
+    [mainView setClipsToBounds:YES];
+    
+    [mainView addSubview:self.viewControllerToShow.view];
+    
+    [mainView addConstraints:[self createConstraints]];
+    
 }
 
 #pragma mark Other functions
@@ -166,7 +149,9 @@
     
 }
 
--(NSArray *)createConstraintsWithDictionary:(NSDictionary *)viewsDictionary{
+-(NSArray *)createConstraints{
+    
+    NSDictionary *viewsDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:self.viewControllerToShow.view,@"view", nil];
     
     NSMutableArray *customConstraints = [[NSMutableArray alloc] init];
     
@@ -203,7 +188,7 @@
 }
 
 
-#pragma mark - Test
+#pragma mark - Setters
 
 -(void)setTrianglePopUpColor:(UIColor *)trianglePopUpColor{
     
