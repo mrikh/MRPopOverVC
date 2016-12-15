@@ -20,25 +20,17 @@ remaining height. If the view from which you wish to display the pop over is pre
     
     viewControllerNew.viewControllerToShow = viewController;
     
-    viewControllerNew.trianglePopUpColor = [UIColor blackColor];
+    viewControllerNew.trianglePopUpColor = [UIColor greenColor];
     
-    viewControllerNew.colorOfBorder = [UIColor blackColor];
+    viewControllerNew.colorOfBorder = [UIColor greenColor];
+
+    viewControllerNew.showShadow = YES;
     
     viewControllerNew.borderWidth = 5.0f;
     
-    viewControllerNew.showShadow = YES;
-    
     viewControllerNew.cornerRadiusForPopOver = 5.0f;
     
-    viewControllerNew.leftSideInset = 5.0f;
-    
-    viewControllerNew.bottomSideInset = 5.0f;
-    
-    viewControllerNew.topSideInset = 5.0f;
-    
-    viewControllerNew.rightSideInset = 5.0f;
-    
-    [viewControllerNew setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    viewControllerNew.edgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
     
     [self presentViewController:viewControllerNew animated:YES completion:nil];
 
