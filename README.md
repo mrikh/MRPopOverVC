@@ -13,12 +13,8 @@ remaining height. If the view from which you wish to display the pop over is pre
     
     //instantiate whichever view controller you wish to show
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"viewControllerIdentifier"];
-    
-    MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] init];
-    
-    viewControllerNew.senderView = sender;
-    
-    viewControllerNew.viewControllerToShow = viewController;
+  
+    MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] initFromView:sender withViewController:viewController];
     
     viewControllerNew.trianglePopUpColor = [UIColor greenColor];
     
@@ -30,7 +26,7 @@ remaining height. If the view from which you wish to display the pop over is pre
     
     viewControllerNew.cornerRadiusForPopOver = 5.0f;
     
-    viewControllerNew.edgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
+    viewControllerNew.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
     
     [self presentViewController:viewControllerNew animated:YES completion:nil];
 
@@ -79,6 +75,5 @@ This is similar to the previous way of implementation with only the difference t
     
     [labelView createInfoWithPointsAndTextDictionaryArray:array andFont:nil];
 
-    
     [self.view addSubview:labelView];
 
