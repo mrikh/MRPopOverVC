@@ -25,44 +25,46 @@
     
     if(self){
         
+        self.labelBorderWidth = 1.0f;
+        
+        self.labelBackgroundColor = [UIColor blueColor];
+        
+        self.labelTextColor = [UIColor whiteColor];
+        
+        self.textBorderColor = [UIColor blackColor];
+        
+        [self setFrame:[UIScreen mainScreen].bounds];
+        
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
     }
     
     return self;
 }
 
+
 -(void)createInfoBelowView:(UIView *)view withString:(NSString *)text andFont:(UIFont *)font{
+ 
+    CGPoint point = CGPointMake(view.center.x, view.center.y);
     
-    [self setFrame:[UIScreen mainScreen].bounds];
+    CGPoint coordinatesInOwnView = [view.superview convertPoint:point toView:self];
     
-    BOOL showOnTopPartOfScreen;
+    BOOL up = [self topHalfOfScreenHasPoint:coordinatesInOwnView];
     
-    CGRect senderViewInOwnView = [view.superview convertRect:view.frame toView:self];
-    
-    if(senderViewInOwnView.origin.y < self.frame.size.height/2){
+    if(up){
         
-        showOnTopPartOfScreen = YES;
+        coordinatesInOwnView  = CGPointMake(coordinatesInOwnView.x, coordinatesInOwnView.y + view.frame.size.height/2);
         
     }else{
         
-        showOnTopPartOfScreen = NO;
+        coordinatesInOwnView  = CGPointMake(coordinatesInOwnView.x, coordinatesInOwnView.y - view.frame.size.height/2);
     }
     
-    UIView *triangleView = [[MRTriangleView alloc] initTriangleViewNearFrame:senderViewInOwnView andShowOnTop:showOnTopPartOfScreen withColor:self.textBorderColor];
-    
-    UILabel *textLabel = [self createLabelWithString:text nearView:triangleView andShowOnTop:showOnTopPartOfScreen andFont:font];
-    
-    [self modifyLabelFrameAsRequiredOfLabel:textLabel];
-    
-    [self addSubview:triangleView];
-    [self addSubview:textLabel];
+    [self createInfoNearPoint:coordinatesInOwnView insideView:view.superview withString:text andFont:font andShowOnTopPart:up];
 }
 
 
 -(void)createInfoWithPointsAndTextDictionaryArray:(NSArray *)array andFont:(UIFont *)font{
-    
-    [self setFrame:[UIScreen mainScreen].bounds];
-    
+
     [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         MRPopOverModel *model;
@@ -75,40 +77,47 @@
         
             [[[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Please use array of dictionaries developer sir" delegate:nil cancelButtonTitle:@"Okay D:" otherButtonTitles:nil] show];
             
-            return ;
+            *stop = YES;
         }
+
+        CGPoint point = CGPointMake([model.xCoordinate doubleValue], [model.yCoordinate doubleValue]);
         
-        BOOL showOnTopPartOfScreen;
-        
-        CGPoint coordinatesInOwnView = [model.viewToMakeIn convertPoint:CGPointMake([model.xCoordinate floatValue], [model.yCoordinate floatValue]) toView:self];
-        
-        if(coordinatesInOwnView.y < self.frame.size.height/2){
-            
-            showOnTopPartOfScreen = YES;
-            
-        }else{
-            
-            showOnTopPartOfScreen = NO;
-        }
-        
-        
-        UIView *triangleView = [[MRTriangleView alloc] initTriangleViewNearPoint:CGPointMake(coordinatesInOwnView.x, coordinatesInOwnView.y) andShowOnTop:showOnTopPartOfScreen withColor:self.textBorderColor];
-        
-        UILabel *textLabel = [self createLabelWithString:model.text nearView:triangleView andShowOnTop:showOnTopPartOfScreen andFont:font];
-        
-        [self modifyLabelFrameAsRequiredOfLabel:textLabel];
-        
-        [self addSubview:triangleView];
-        [self addSubview:textLabel];
-        
+        CGPoint coordinatesInOwnView = [model.viewToMakeIn convertPoint:point toView:self];
+       
+        [self createInfoNearPoint:coordinatesInOwnView insideView:model.viewToMakeIn withString:model.text andFont:font andShowOnTopPart:[self topHalfOfScreenHasPoint:coordinatesInOwnView]];
     }];
-    
 }
 
+-(void)createInfoNearPoint:(CGPoint)point insideView:(UIView *)view withString:(NSString *)text andFont:(UIFont *)font andShowOnTopPart:(BOOL)showOnTopPartOfScreen{
+    
+    UIView *triangleView = [[MRTriangleView alloc] initTriangleViewNearPoint:point andShowOnTop:showOnTopPartOfScreen withColor:self.textBorderColor];
+    
+    UILabel *textLabel = [self createLabelWithString:text nearView:triangleView andShowOnTop:showOnTopPartOfScreen andFont:font];
+    
+    [self modifyLabelFrameAsRequiredOfLabel:textLabel];
+    
+    [self addSubview:triangleView];
+    
+    [self addSubview:textLabel];
+}
 
 #pragma mark - Private Functions
 
 #define buffer 8.0f
+
+
+-(BOOL)topHalfOfScreenHasPoint:(CGPoint)point{
+    
+    if(point.y < self.frame.size.height/2){
+        
+        return YES;
+        
+    }else{
+        
+        return NO;
+        
+    }
+}
 
 -(UILabel *)createLabelWithString:(NSString *)text nearView:(UIView *)triangleView andShowOnTop:(BOOL)showOnTop andFont:(UIFont *)font{
     
@@ -151,7 +160,6 @@
     [mainLabel setText:text];
     
     return mainLabel;
-    
 }
 
 
@@ -166,6 +174,12 @@
         CGFloat minXForLabel = MAX(0,label.frame.origin.x - (CGRectGetMaxX(labelFrame)-screenBounds.size.width));
         
         [label setFrame:CGRectMake(minXForLabel, labelFrame.origin.y, labelFrame.size.width, labelFrame.size.height)];
+    
+    }
+    
+    if(CGRectGetMinX(labelFrame) < 0){
+
+        [label setFrame:CGRectMake(0, labelFrame.origin.y, labelFrame.size.width, labelFrame.size.height)];
     }
 }
 
