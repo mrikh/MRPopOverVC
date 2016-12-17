@@ -11,7 +11,7 @@
 
 @interface MRPopOverViewController ()<UIGestureRecognizerDelegate>{
     
-    UIView *triangleView, *mainView;
+    UIView *triangleView, *mainView, *senderView, *viewControllerToShowView;
     
     UIBezierPath *shadowPath;
 }
@@ -20,7 +20,7 @@
 
 @implementation MRPopOverViewController
 
--(instancetype)init{
+-(instancetype)initFromView:(UIView *)fromView withViewController:(UIViewController *)viewToShow{
     
     if(self = [super init]){
         
@@ -34,7 +34,17 @@
         
         self.cornerRadiusForPopOver = 5.0f;
         
+        senderView = fromView;
+        
         self.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
+        
+        viewControllerToShowView = viewToShow.view;
+        
+        [self addChildViewController:viewToShow];
+        
+        [viewControllerToShowView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        [viewToShow didMoveToParentViewController:self];
         
         [self setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     }
@@ -53,10 +63,6 @@
     
     [self.view addGestureRecognizer:tapGesture];
     
-    [self addChildViewController:self.viewControllerToShow];
-    
-    [self.viewControllerToShow didMoveToParentViewController:self];
-    
     [self.view setBackgroundColor:[UIColor clearColor]];
 }
 
@@ -71,22 +77,30 @@
     
     if([self isMovingToParentViewController] || [self isBeingPresented]){
         
-        [self createViewControllerFromView:self.senderView];
+        [self createViewControllerFromView:senderView];
     }
 }
 
 
 -(void)createViewControllerFromView:(UIView *)fromView{
     
-    [self.viewControllerToShow.view setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
     CGRect senderViewInOwnView = [fromView.superview convertRect:fromView.frame toView:self.view];
     
     BOOL showOnTopPartOfScreen = senderViewInOwnView.origin.y < self.view.frame.size.height/2;
     
-    //initially create and setup views
+    CGPoint point;
     
-    triangleView = [[MRTriangleView alloc] initTriangleViewNearFrame:senderViewInOwnView andShowOnTop:showOnTopPartOfScreen withColor:self.trianglePopUpColor];
+    if(showOnTopPartOfScreen){
+        
+        point = CGPointMake(senderViewInOwnView.origin.x + senderViewInOwnView.size.width/2, senderViewInOwnView.origin.y + fromView.bounds.size.height);
+        
+    }else{
+        
+        point = CGPointMake(senderViewInOwnView.origin.x + senderViewInOwnView.size.width/2, senderViewInOwnView.origin.y);
+    }
+    
+    //initially create and setup views
+    triangleView = [[MRTriangleView alloc] initTriangleViewNearPoint:point andShowOnTop:showOnTopPartOfScreen withColor:self.trianglePopUpColor];
     
     [self createMainViewControllerViewOnSide:showOnTopPartOfScreen];
     
@@ -124,7 +138,7 @@
     
     [mainView setClipsToBounds:YES];
     
-    [mainView addSubview:self.viewControllerToShow.view];
+    [mainView addSubview:viewControllerToShowView];
     
     [mainView addConstraints:[self createConstraints]];
     
@@ -153,7 +167,7 @@
 
 -(NSArray *)createConstraints{
     
-    NSDictionary *viewsDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:self.viewControllerToShow.view,@"view", nil];
+    NSDictionary *viewsDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:viewControllerToShowView,@"view", nil];
     
     NSMutableArray *customConstraints = [[NSMutableArray alloc] init];
     
