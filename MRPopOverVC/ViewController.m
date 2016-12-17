@@ -29,13 +29,10 @@
 
 - (IBAction)buttonAction:(UIButton *)sender {
     
+    /*
     UITableViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"table"];
     
-    MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] init];
-    
-    viewControllerNew.senderView = sender;
-    
-    viewControllerNew.viewControllerToShow = viewController;
+    MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] initFromView:sender withViewController:viewController];
     
     viewControllerNew.trianglePopUpColor = [UIColor greenColor];
     
@@ -47,11 +44,11 @@
     
     viewControllerNew.cornerRadiusForPopOver = 5.0f;
     
-    viewControllerNew.edgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
+    viewControllerNew.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
     
     [self presentViewController:viewControllerNew animated:YES completion:nil];
     
-     /*
+    */
     
     
     MRPopOverView *labelView = [[MRPopOverView alloc] init];
@@ -70,7 +67,7 @@
 //    [labelView createInfoWithPointsAndTextDictionaryArray:@[[[NSDictionary alloc] initWithObjectsAndKeys:@"How ya doin?Heyyyyyy!",@"text",@(sender.center.x),@"xCoordinate", @(sender.center.y), @"yCoordinate",sender.superview,@"viewToBeMadeIn",nil]] andFont:nil];
     
     [self.view addSubview:labelView];
-    */
+    
 }
 
 @end
