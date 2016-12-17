@@ -18,10 +18,6 @@
 
 @interface MRPopOverViewController : UIViewController
 
-@property (strong, nonatomic) UIViewController *viewControllerToShow;
-
-@property (strong, nonatomic) UIView *senderView;
-
 @property (strong, nonatomic) UIColor *trianglePopUpColor;
 
 @property (strong, nonatomic) UIColor *colorOfBorder;
@@ -35,5 +31,7 @@
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
 
 @property (weak, nonatomic) id<MRPopOverViewControllerDelegate> delegate;
+
+-(instancetype)initFromView:(UIView *)fromView withViewController:(UIViewController *)viewToShow;
 
 @end
