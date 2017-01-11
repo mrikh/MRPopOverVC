@@ -12,8 +12,6 @@
 @interface MRPopOverViewController ()<UIGestureRecognizerDelegate>{
     
     UIView *triangleView, *mainView, *senderView, *viewControllerToShowView;
-    
-    UIBezierPath *shadowPath;
 }
 
 @end
@@ -121,13 +119,32 @@
 
 -(void)createMainViewControllerViewOnSide:(BOOL)showOnTop{
     
+    //show triangle in top half of the screen
     if(showOnTop){
         
-        mainView = [[UIView alloc] initWithFrame:CGRectMake(self.edgeInsets.left, triangleView.frame.origin.y + triangleView.frame.size.height, [UIScreen mainScreen].bounds.size.width - self.edgeInsets.right - self.edgeInsets.left, [UIScreen mainScreen].bounds.size.height - self.edgeInsets.bottom - (triangleView.frame.origin.y + triangleView.frame.size.height))];
+        if(self.totalHeight){
+            
+            float height = [self.totalHeight floatValue];
+            
+             mainView = [[UIView alloc] initWithFrame:CGRectMake(self.edgeInsets.left, triangleView.frame.origin.y + triangleView.frame.size.height, [UIScreen mainScreen].bounds.size.width - self.edgeInsets.right - self.edgeInsets.left, MIN([UIScreen mainScreen].bounds.size.height - self.edgeInsets.bottom - (triangleView.frame.origin.y + triangleView.frame.size.height),height))];
+            
+        }else{
+        
+            mainView = [[UIView alloc] initWithFrame:CGRectMake(self.edgeInsets.left, triangleView.frame.origin.y + triangleView.frame.size.height, [UIScreen mainScreen].bounds.size.width - self.edgeInsets.right - self.edgeInsets.left, [UIScreen mainScreen].bounds.size.height - self.edgeInsets.bottom - (triangleView.frame.origin.y + triangleView.frame.size.height))];
+        }
         
     }else{
         
-        mainView = [[UIView alloc] initWithFrame:CGRectMake(self.edgeInsets.left, self.edgeInsets.top, [UIScreen mainScreen].bounds.size.width - self.edgeInsets.right - self.edgeInsets.left, triangleView.frame.origin.y - self.edgeInsets.top)];
+        if(self.totalHeight){
+         
+            float height = [self.totalHeight floatValue];
+            
+            mainView = [[UIView alloc] initWithFrame:CGRectMake(self.edgeInsets.left, MAX(self.edgeInsets.top, triangleView.frame.origin.y - height), [UIScreen mainScreen].bounds.size.width - self.edgeInsets.right - self.edgeInsets.left, MIN(triangleView.frame.origin.y - self.edgeInsets.top, height))];
+            
+        }else{
+        
+            mainView = [[UIView alloc] initWithFrame:CGRectMake(self.edgeInsets.left, self.edgeInsets.top, [UIScreen mainScreen].bounds.size.width - self.edgeInsets.right - self.edgeInsets.left, triangleView.frame.origin.y - self.edgeInsets.top)];
+        }
     }
     
     [mainView.layer setBorderWidth:self.borderWidth];
@@ -148,10 +165,14 @@
 
 -(void)createShadow{
     
-    if(!shadowPath){
+    UIBezierPath *shadowPath;
+    
+    if(shadowPath || !mainView){
         
-        shadowPath = [UIBezierPath bezierPathWithRect:mainView.bounds];
+        return;
     }
+    
+    shadowPath = [UIBezierPath bezierPathWithRect:mainView.bounds];
     
     mainView.layer.masksToBounds = NO;
     
