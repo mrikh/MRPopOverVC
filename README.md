@@ -27,8 +27,12 @@ remaining height. If the view from which you wish to display the pop over is pre
     viewControllerNew.cornerRadiusForPopOver = 5.0f;
     
     viewControllerNew.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
-    
+        
+    //pass total height if you want to, for your view to take up (In case you want it to take up a part of the screen) ! Other wise don't, no problem :D
+    viewControllerNew.totalHeight = [NSNumber numberWithFloat:totalHeight];
+
     [self presentViewController:viewControllerNew animated:YES completion:nil];
+
 
 
 ##Second - Present a pop over with a string from a view
