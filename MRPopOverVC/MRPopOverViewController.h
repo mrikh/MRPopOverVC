@@ -26,6 +26,8 @@
 
 @property (assign, nonatomic) CGFloat borderWidth;
 
+@property (assign, nonatomic) NSNumber *totalHeight;
+
 @property (assign, nonatomic) CGFloat cornerRadiusForPopOver;
 
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
