@@ -11,7 +11,8 @@ remaining height. If the view from which you wish to display the pop over is pre
 ![alt tag](http://i.imgur.com/WllEUy0.png) ![alt tag](http://i.imgur.com/gub8IzR.png) ![alt tag](http://i.imgur.com/mQ6X3VE.png) 
 ######Use the below code segment to show the pop over:
     
-    //instantiate whichever view controller you wish to show
+```   
+ //instantiate whichever view controller you wish to show
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"viewControllerIdentifier"];
   
     MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] initFromView:sender withViewController:viewController];
@@ -27,12 +28,12 @@ remaining height. If the view from which you wish to display the pop over is pre
     viewControllerNew.cornerRadiusForPopOver = 5.0f;
     
     viewControllerNew.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
-        
-    viewControllerNew.totalHeight = [NSNumber numberWithFloat:totalHeight];
 
-    [self presentViewController:viewControllerNew animated:YES completion:nil];
+    //pass total height if you want to, for your view to take up (In case you want it to take up a part of the screen)
+    viewControllerNew.totalHeight = [NSNumber numberWithFloat:totalHeight];
 
-
+    [self presentViewController:viewControllerNew animated:YES completion:nil];
+```
 
 ##Second - Present a pop over with a string from a view
 You can present a pop over from any view of your choice and display a pop up with a text string. (Sort of like facebook tutorials). Have a look at the attached screenshot.
