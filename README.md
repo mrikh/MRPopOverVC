@@ -13,26 +13,26 @@ remaining height. If the view from which you wish to display the pop over is pre
     
 ```   
  //instantiate whichever view controller you wish to show
-    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"viewControllerIdentifier"];
+ UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"viewControllerIdentifier"];
   
-    MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] initFromView:sender withViewController:viewController];
+ MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] initFromView:sender withViewController:viewController];
     
-    viewControllerNew.trianglePopUpColor = [UIColor greenColor];
+ viewControllerNew.trianglePopUpColor = [UIColor greenColor];
     
-    viewControllerNew.colorOfBorder = [UIColor greenColor];
+ viewControllerNew.colorOfBorder = [UIColor greenColor];
 
-    viewControllerNew.showShadow = YES;
+ viewControllerNew.showShadow = YES;
     
-    viewControllerNew.borderWidth = 5.0f;
+ viewControllerNew.borderWidth = 5.0f;
     
-    viewControllerNew.cornerRadiusForPopOver = 5.0f;
+ viewControllerNew.cornerRadiusForPopOver = 5.0f;
     
-    viewControllerNew.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
+ viewControllerNew.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
 
-    //pass total height if you want to, for your view to take up (In case you want it to take up a part of the screen)
-    viewControllerNew.totalHeight = [NSNumber numberWithFloat:totalHeight];
+ //pass total height if you want to, for your view to take up (In case you want it to take up a part of the screen)
+ viewControllerNew.totalHeight = [NSNumber numberWithFloat:totalHeight];
 
-    [self presentViewController:viewControllerNew animated:YES completion:nil];
+ [self presentViewController:viewControllerNew animated:YES completion:nil];
 ```
 
 ##Second - Present a pop over with a string from a view
