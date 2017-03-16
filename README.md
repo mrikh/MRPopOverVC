@@ -8,7 +8,9 @@ There are three ways you can use this project.
 ##First - Present a pop over with a view controller
 You can show a view controller from any view of that you decided. It will adjust itself to fit across the whole width and 
 remaining height. If the view from which you wish to display the pop over is present in the top part of the screen, the pop over will appear from the view all the way to the bottom of the screen. If the view is present in the bottom half of the screen, the pop over will appear from the view to the top part of the screen. Have a look at the screenshot:
+
 ![alt tag](http://i.imgur.com/WllEUy0.png) ![alt tag](http://i.imgur.com/gub8IzR.png) ![alt tag](http://i.imgur.com/mQ6X3VE.png) 
+
 ######Use the below code segment to show the pop over:
     
 ```   
