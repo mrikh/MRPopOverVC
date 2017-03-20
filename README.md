@@ -13,29 +13,26 @@ remaining height. If the view from which you wish to display the pop over is pre
 
 ######Use the below code segment to show the pop over:
     
-```   
- //instantiate whichever view controller you wish to show
- UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"viewControllerIdentifier"];
-  
- MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] initFromView:sender withViewController:viewController];
+    //instantiate whichever view controller you wish to show
+    UITableViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"table"];
     
- viewControllerNew.trianglePopUpColor = [UIColor greenColor];
-    
- viewControllerNew.colorOfBorder = [UIColor greenColor];
+    MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] initFromView:sender withViewController:viewController];
+        
+    [self presentViewController:viewControllerNew animated:YES completion:nil];
 
- viewControllerNew.showShadow = YES;
-    
- viewControllerNew.borderWidth = 5.0f;
-    
- viewControllerNew.cornerRadiusForPopOver = 5.0f;
-    
- viewControllerNew.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
+Some additional properties that allow you to customize the pop over:
 
- //pass total height if you want to, for your view to take up (In case you want it to take up a part of the screen)
- viewControllerNew.totalHeight = [NSNumber numberWithFloat:totalHeight];
+    @property (strong, nonatomic) UIColor *trianglePopUpColor;
+    @property (strong, nonatomic) UIColor *colorOfBorder;
+    @property (assign, nonatomic) CGFloat borderWidth;
+    @property (assign, nonatomic) CGFloat cornerRadiusForPopOver;
+    @property (assign, nonatomic) UIEdgeInsets edgeInsets;
 
- [self presentViewController:viewControllerNew animated:YES completion:nil];
-```
+    //set the below property before presenting the view controller. Otherwise it won't work 
+    @property (assign, nonatomic) CGFloat triangleWidth;
+
+    //If you add a total height, the pop over will ignore the edge inset of the side on which the popover is displayed. For example if the popover appears on top, the top edge inset will be ignored.
+    @property (assign, nonatomic) NSNumber *totalHeight;
 
 ##Second - Present a pop over with a string from a view
 You can present a pop over from any view of your choice and display a pop up with a text string. (Sort of like facebook tutorials). Have a look at the attached screenshot.
@@ -46,35 +43,29 @@ You can present a pop over from any view of your choice and display a pop up wit
     
     MRPopOverView *labelView = [[MRPopOverView alloc] init];
     
-    labelView.labelBorderWidth = 1.0f;
-    
-    labelView.labelTextColor = [UIColor whiteColor];
-    
-    labelView.textBorderColor = [UIColor blackColor];
-    
-    labelView.labelBackgroundColor = [UIColor blueColor];
-    
     [labelView createInfoBelowView:sender withString:@"Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?Heyyyyyy! How ya doin?" andFont:nil];
     
     [self.view addSubview:labelView];
 
+Additional customization properties:
+     
+    @property (assign, nonatomic) CGFloat labelBorderWidth;
+    @property (strong, nonatomic) UIColor *labelBackgroundColor;
+    @property (strong, nonatomic) UIColor *labelTextColor;
+    @property (strong, nonatomic) UIColor *textBorderColor;
+    
+    //set the below property before presenting the view controller. Otherwise it won't work 
+    @property (assign, nonatomic) CGFloat triangleWidth;
+
 ##Third - Present a pop over with a string from an array of coordinates
-This is similar to the previous way of implementation with only the difference that instead of passing a view to display a string, you can pass an array of dictionaries containing coordinates and text for each coordinate. 
+This is similar to the previous way of implementation with only the difference that instead of passing a view to display a string, you can pass an array of dictionaries containing coordinates and text for each label. 
 
 ![alt tag](http://i.imgur.com/Lv1LLzI.png) ![alt tag](http://i.imgur.com/q3oAR3A.png) 
 
 ######Use the below code segment to add the pop over:
     
     MRPopOverView *labelView = [[MRPopOverView alloc] init];
-    
-    labelView.labelBorderWidth = 1.0f;
-    
-    labelView.labelTextColor = [UIColor whiteColor];
-    
-    labelView.textBorderColor = [UIColor blackColor];
-    
-    labelView.labelBackgroundColor = [UIColor blueColor];
-    
+       
     NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"How ya doin?Heyyyyyy!",@"text",@(sender.center.x),@"xCoordinate", @(sender.center.y), @"yCoordinate",sender.superview,@"viewToBeMadeIn",nil];
     
     NSArray *array = [[NSArray alloc] initWithObjects:dict, nil];
@@ -83,3 +74,4 @@ This is similar to the previous way of implementation with only the difference t
 
     [self.view addSubview:labelView];
 
+The additional properties are same as above
