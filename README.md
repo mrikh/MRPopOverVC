@@ -17,7 +17,7 @@ remaining height. If the view from which you wish to display the pop over is pre
     UITableViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"table"];
     
     MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] initFromView:sender withViewController:viewController];
-        
+
     [self presentViewController:viewControllerNew animated:YES completion:nil];
 
 ###### Some additional properties that allow you to customize the pop over:
@@ -34,6 +34,16 @@ remaining height. If the view from which you wish to display the pop over is pre
     @property (assign, nonatomic) UIEdgeInsets edgeInsets;
     @property (assign, nonatomic) CGFloat triangleWidth;
     @property (assign, nonatomic) NSNumber *totalHeight;
+
+###### Also there is a delegate to notify you whenever the user decides he wants to close the screen by tapping outside:
+
+Just make your class conform to the `MRPopOverViewControllerDelegate` and set it using:
+
+    viewControllerNew.delegate = self;
+
+To peform some action just write the function inside your class:
+
+    -(void)userDidDismissViewController;
 
 **Note:** Set the `triangleWidth`, `edgeInsets`, `totalHeight` properties before presenting the view controller. Otherwise it won't work as they cannot be modified at run time(yet?).  You will have to recreate the pop over view controller if you want to change either of the 3 mentioed properties at run time after deallocation the previous instance :D.
 
@@ -61,6 +71,9 @@ You can present a pop over from any view of your choice and display a pop up wit
     @property (assign, nonatomic) CGFloat triangleWidth;
 
 **Note:** Set the `triangleWidth` property before presenting the view controller. Otherwise it won't work.
+
+**Note:** Similar to the view controller, there is a delegate to notify you when user dismisses the label called `userDidDismissView`
+
 ## Third - Present a pop over with a string from an array of coordinates
 This is similar to the previous way of implementation with only the difference that instead of passing a view to display a string, you can pass an array of dictionaries containing coordinates and text for each label. 
 
