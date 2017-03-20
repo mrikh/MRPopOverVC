@@ -35,6 +35,8 @@
         
         [self setFrame:[UIScreen mainScreen].bounds];
         
+        self.triangleWidth = 10.0f;
+        
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
     }
     
@@ -90,7 +92,7 @@
 
 -(void)createInfoNearPoint:(CGPoint)point insideView:(UIView *)view withString:(NSString *)text andFont:(UIFont *)font andShowOnTopPart:(BOOL)showOnTopPartOfScreen{
     
-    UIView *triangleView = [[MRTriangleView alloc] initTriangleViewNearPoint:point andShowOnTop:showOnTopPartOfScreen withColor:self.textBorderColor];
+    UIView *triangleView = [[MRTriangleView alloc] initTriangleViewNearPoint:point andShowOnTop:showOnTopPartOfScreen withColor:self.textBorderColor withWidth:self.triangleWidth];
     
     UILabel *textLabel = [self createLabelWithString:text nearView:triangleView andShowOnTop:showOnTopPartOfScreen andFont:font];
     

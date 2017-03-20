@@ -10,6 +10,6 @@
 
 @interface MRTriangleView : UIView
 
--(instancetype)initTriangleViewNearPoint:(CGPoint)point andShowOnTop:(BOOL)showOnTop withColor:(UIColor *)color;
+-(instancetype)initTriangleViewNearPoint:(CGPoint)point andShowOnTop:(BOOL)showOnTop withColor:(UIColor *)color withWidth:(CGFloat) width;
 
 @end

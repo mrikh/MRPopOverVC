@@ -20,9 +20,9 @@
 
 @property (strong, nonatomic) UIColor *trianglePopUpColor;
 
-@property (strong, nonatomic) UIColor *colorOfBorder;
+@property (assign, nonatomic) CGFloat triangleWidth;
 
-@property (assign, nonatomic) BOOL showShadow;
+@property (strong, nonatomic) UIColor *colorOfBorder;
 
 @property (assign, nonatomic) CGFloat borderWidth;
 
@@ -33,6 +33,16 @@
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
 
 @property (weak, nonatomic) id<MRPopOverViewControllerDelegate> delegate;
+
+#pragma mark - Shadow
+
+@property (assign, nonatomic) CGFloat shadowRadius;
+
+@property (strong, nonatomic) UIColor *shadowColor;
+
+@property (assign, nonatomic) CGSize shadowOffset;
+
+@property (assign, nonatomic) CGFloat shadowOpacity;
 
 -(instancetype)initFromView:(UIView *)fromView withViewController:(UIViewController *)viewToShow;
 

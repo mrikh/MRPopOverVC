@@ -26,11 +26,19 @@
         
         self.colorOfBorder = [UIColor blackColor];
         
-        self.showShadow = YES;
+        self.shadowColor = [UIColor blackColor];
+        
+        self.shadowOffset = CGSizeMake(1.0f, 1.0f);
+        
+        self.shadowRadius = 1.0f;
         
         self.borderWidth = 5.0f;
         
         self.cornerRadiusForPopOver = 5.0f;
+        
+        self.triangleWidth = 10.0f;
+        
+        self.shadowOpacity = 0.5f;
         
         senderView = fromView;
         
@@ -98,14 +106,11 @@
     }
     
     //initially create and setup views
-    triangleView = [[MRTriangleView alloc] initTriangleViewNearPoint:point andShowOnTop:showOnTopPartOfScreen withColor:self.trianglePopUpColor];
+    triangleView = [[MRTriangleView alloc] initTriangleViewNearPoint:point andShowOnTop:showOnTopPartOfScreen withColor:self.trianglePopUpColor withWidth:self.triangleWidth];
     
     [self createMainViewControllerViewOnSide:showOnTopPartOfScreen];
     
-    if(self.showShadow){
-        
-        [self createShadow];
-    }
+    [self createShadow];
     
     [self.view addSubview:triangleView];
     
@@ -158,32 +163,26 @@
     [mainView addSubview:viewControllerToShowView];
     
     [mainView addConstraints:[self createConstraints]];
-    
 }
 
 #pragma mark Other functions
 
 -(void)createShadow{
     
-    UIBezierPath *shadowPath;
-    
-    if(shadowPath || !mainView){
+    if(!mainView){
         
         return;
     }
-    
-    shadowPath = [UIBezierPath bezierPathWithRect:mainView.bounds];
-    
+
     mainView.layer.masksToBounds = NO;
     
-    mainView.layer.shadowColor = [UIColor blackColor].CGColor;
+    mainView.layer.shadowColor = self.shadowColor.CGColor;
     
-    mainView.layer.shadowOffset = CGSizeMake(-3.0f, 3.0f);
+    mainView.layer.shadowOffset = self.shadowOffset;
     
-    mainView.layer.shadowOpacity = 0.5f;
+    mainView.layer.shadowRadius = self.shadowRadius;
     
-    mainView.layer.shadowPath = shadowPath.CGPath;
-    
+    mainView.layer.shadowOpacity = self.shadowOpacity;
 }
 
 -(NSArray *)createConstraints{
@@ -241,18 +240,49 @@
     [mainView.layer setBorderColor:_colorOfBorder.CGColor];
 }
 
--(void)setShowShadow:(BOOL)showShadow{
-    
-    _showShadow = showShadow;
-    
-    [self createShadow];
-}
-
 -(void)setBorderWidth:(CGFloat)borderWidth{
     
     _borderWidth = borderWidth;
     
     [mainView.layer setBorderWidth:_borderWidth];
+}
+
+-(void)setCornerRadiusForPopOver:(CGFloat)cornerRadiusForPopOver{
+    
+    _cornerRadiusForPopOver = cornerRadiusForPopOver;
+    
+    [mainView.layer setCornerRadius:_cornerRadiusForPopOver];
+}
+
+
+#pragma mark Shadow
+
+-(void)setShadowRadius:(CGFloat)shadowRadius{
+    
+    _shadowRadius = shadowRadius;
+    
+    mainView.layer.shadowRadius = _shadowRadius;
+}
+
+-(void)setShadowColor:(UIColor *)shadowColor{
+    
+    _shadowColor = shadowColor;
+    
+    mainView.layer.shadowColor = _shadowColor.CGColor;
+}
+
+-(void)setShadowOffset:(CGSize)shadowOffset{
+    
+    _shadowOffset = shadowOffset;
+    
+    mainView.layer.shadowOffset = _shadowOffset;
+}
+
+-(void)setShadowOpacity:(CGFloat)shadowOpacity{
+    
+    _shadowOpacity = shadowOpacity;
+    
+    mainView.layer.shadowOpacity = _shadowOpacity;
 }
 
 @end

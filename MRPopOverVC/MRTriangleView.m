@@ -8,42 +8,39 @@
 
 #import "MRTriangleView.h"
 
-#define triangleViewSize 10
-
 @implementation MRTriangleView
 
-
--(instancetype)initTriangleViewNearPoint:(CGPoint)point andShowOnTop:(BOOL)showOnTop withColor:(UIColor *)color{
+-(instancetype)initTriangleViewNearPoint:(CGPoint)point andShowOnTop:(BOOL)showOnTop withColor:(UIColor *)color withWidth:(CGFloat)width{
     
     self = [super init];
     
     if(self){
         
-        [self createTriangleViewNearPoint:point andShowOnTop:showOnTop withColor:color];
+        [self createTriangleViewNearPoint:point andShowOnTop:showOnTop withColor:color withWidth:width];
     }
     
     return self;
 }
 
 
--(void)createTriangleViewNearPoint:(CGPoint)point andShowOnTop:(BOOL)showOnTop withColor:(UIColor *)color{
+-(void)createTriangleViewNearPoint:(CGPoint)point andShowOnTop:(BOOL)showOnTop withColor:(UIColor *)color withWidth:(CGFloat)width{
 
     CGPoint firstPoint, secondPoint, thirdPoint;
     
     if(showOnTop){
         
-        firstPoint = CGPointMake(triangleViewSize/2, 0);
-        secondPoint = CGPointMake(0, triangleViewSize);
-        thirdPoint = CGPointMake(triangleViewSize, triangleViewSize);
+        firstPoint = CGPointMake(width/2, 0);
+        secondPoint = CGPointMake(0, width);
+        thirdPoint = CGPointMake(width, width);
         
     }else{
         
-        firstPoint = CGPointMake(triangleViewSize/2, triangleViewSize);
+        firstPoint = CGPointMake(width/2, width);
         secondPoint = CGPointMake(0, 0);
-        thirdPoint = CGPointMake(triangleViewSize, 0);
+        thirdPoint = CGPointMake(width, 0);
     }
     
-    [self setFrame: CGRectMake(point.x - triangleViewSize/2, point.y, triangleViewSize, triangleViewSize)];
+    [self setFrame: CGRectMake(point.x - width/2, point.y, width, width)];
     
     [self setBackgroundColor:color];
     

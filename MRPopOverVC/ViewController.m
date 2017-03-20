@@ -28,29 +28,16 @@
 }
 
 - (IBAction)buttonAction:(UIButton *)sender {
-    
     /*
     UITableViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"table"];
     
     MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] initFromView:sender withViewController:viewController];
     
-    viewControllerNew.trianglePopUpColor = [UIColor greenColor];
-    
-    viewControllerNew.colorOfBorder = [UIColor greenColor];
-
-    viewControllerNew.showShadow = YES;
-    
-    viewControllerNew.borderWidth = 5.0f;
-    
-    viewControllerNew.cornerRadiusForPopOver = 5.0f;
-    
-    viewControllerNew.edgeInsets = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
-    
     [self presentViewController:viewControllerNew animated:YES completion:nil];
-    
     */
     
     
+   
     MRPopOverView *labelView = [[MRPopOverView alloc] init];
     
     labelView.labelBorderWidth = 1.0f;

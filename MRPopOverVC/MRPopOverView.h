@@ -12,6 +12,8 @@
 
 @property (assign, nonatomic) CGFloat labelBorderWidth;
 
+@property (assign, nonatomic) CGFloat triangleWidth;
+
 @property (strong, nonatomic) UIColor *labelBackgroundColor;
 
 @property (strong, nonatomic) UIColor *labelTextColor;
