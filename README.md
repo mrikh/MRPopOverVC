@@ -20,7 +20,7 @@ remaining height. If the view from which you wish to display the pop over is pre
         
     [self presentViewController:viewControllerNew animated:YES completion:nil];
 
-Some additional properties that allow you to customize the pop over:
+###### Some additional properties that allow you to customize the pop over:
 
     @property (strong, nonatomic) UIColor *trianglePopUpColor;
     @property (strong, nonatomic) UIColor *colorOfBorder;
@@ -47,7 +47,7 @@ You can present a pop over from any view of your choice and display a pop up wit
     
     [self.view addSubview:labelView];
 
-Additional customization properties:
+###### Additional customization properties:
    
     @property (assign, nonatomic) CGFloat labelBorderWidth;
     @property (strong, nonatomic) UIColor *labelBackgroundColor;
@@ -74,4 +74,4 @@ This is similar to the previous way of implementation with only the difference t
 
     [self.view addSubview:labelView];
 
-The additional properties are same as above.
+**Note:** The additional properties are same as above.
