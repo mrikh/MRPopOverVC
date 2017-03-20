@@ -10,6 +10,13 @@
 #import "MRPopOverModel.h"
 #import "MRPopOverView.h"
 
+@interface MRPopOverView(){
+    
+    UILabel *mainLabel;
+}
+
+@end
+
 @implementation MRPopOverView
 
 -(void)awakeFromNib{
@@ -94,13 +101,13 @@
     
     UIView *triangleView = [[MRTriangleView alloc] initTriangleViewNearPoint:point andShowOnTop:showOnTopPartOfScreen withColor:self.textBorderColor withWidth:self.triangleWidth];
     
-    UILabel *textLabel = [self createLabelWithString:text nearView:triangleView andShowOnTop:showOnTopPartOfScreen andFont:font];
+    mainLabel = [self createLabelWithString:text nearView:triangleView andShowOnTop:showOnTopPartOfScreen andFont:font];
     
-    [self modifyLabelFrameAsRequiredOfLabel:textLabel];
+    [self modifyLabelFrameAsRequiredOfLabel:mainLabel];
     
     [self addSubview:triangleView];
     
-    [self addSubview:textLabel];
+    [self addSubview:mainLabel];
 }
 
 #pragma mark - Private Functions
@@ -147,21 +154,21 @@
         
     }
         
-    UILabel *mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(triangleView.frame.origin.x - triangleView.frame.size.width/2 - buffer, yCoordinate, stringSize.width, stringSize.height)];
+    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(triangleView.frame.origin.x - triangleView.frame.size.width/2 - buffer, yCoordinate, stringSize.width, stringSize.height)];
     
-    [mainLabel setBackgroundColor:self.labelBackgroundColor];
-    [mainLabel setTextAlignment:NSTextAlignmentCenter];
-    [mainLabel setFont:fontToUse];
-    [mainLabel setTextColor:self.labelTextColor];
-    [mainLabel.layer setBorderColor: self.textBorderColor.CGColor];
-    [mainLabel.layer setBorderWidth:self.labelBorderWidth];
-    [mainLabel.layer setCornerRadius:5.0f];
-    [mainLabel setNumberOfLines:0];
-    [mainLabel setLineBreakMode:NSLineBreakByWordWrapping];
-    [mainLabel setClipsToBounds:YES];
-    [mainLabel setText:text];
+    [tempLabel setBackgroundColor:self.labelBackgroundColor];
+    [tempLabel setTextAlignment:NSTextAlignmentCenter];
+    [tempLabel setFont:fontToUse];
+    [tempLabel setTextColor:self.labelTextColor];
+    [tempLabel.layer setBorderColor: self.textBorderColor.CGColor];
+    [tempLabel.layer setBorderWidth:self.labelBorderWidth];
+    [tempLabel.layer setCornerRadius:5.0f];
+    [tempLabel setNumberOfLines:0];
+    [tempLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    [tempLabel setClipsToBounds:YES];
+    [tempLabel setText:text];
     
-    return mainLabel;
+    return tempLabel;
 }
 
 
@@ -193,6 +200,36 @@
     }
     
     [self removeFromSuperview];
+}
+
+#pragma mark - Setters
+
+-(void)setLabelBorderWidth:(CGFloat)labelBorderWidth{
+    
+    _labelBorderWidth = labelBorderWidth;
+    
+    [mainLabel.layer setBorderWidth:_labelBorderWidth];
+}
+
+-(void)setLabelTextColor:(UIColor *)labelTextColor{
+    
+    _labelTextColor = labelTextColor;
+    
+    [mainLabel setTextColor:_labelTextColor];
+}
+
+-(void)setTextBorderColor:(UIColor *)textBorderColor{
+    
+    _textBorderColor = textBorderColor;
+    
+    [mainLabel.layer setBorderColor: _textBorderColor.CGColor];
+}
+
+-(void)setLabelBackgroundColor:(UIColor *)labelBackgroundColor{
+    
+    _labelBackgroundColor = labelBackgroundColor;
+    
+    [mainLabel setBackgroundColor:_labelBackgroundColor];
 }
 
 @end
