@@ -27,12 +27,12 @@ Some additional properties that allow you to customize the pop over:
     @property (assign, nonatomic) CGFloat borderWidth;
     @property (assign, nonatomic) CGFloat cornerRadiusForPopOver;
     @property (assign, nonatomic) UIEdgeInsets edgeInsets;
-
-    //set the below property before presenting the view controller. Otherwise it won't work 
     @property (assign, nonatomic) CGFloat triangleWidth;
-
-    //If you add a total height, the pop over will ignore the edge inset of the side on which the popover is displayed. For example if the popover appears on top, the top edge inset will be ignored.
     @property (assign, nonatomic) NSNumber *totalHeight;
+
+**Note:** Set the `triangleWidth` property before presenting the view controller. Otherwise it won't work.
+
+**Note:** If you add a total height, the pop over will ignore the edge inset of the side on which the popover is displayed. For example if the popover appears on top, the top edge inset will be ignored. 
 
 ##Second - Present a pop over with a string from a view
 You can present a pop over from any view of your choice and display a pop up with a text string. (Sort of like facebook tutorials). Have a look at the attached screenshot.
@@ -48,14 +48,14 @@ You can present a pop over from any view of your choice and display a pop up wit
     [self.view addSubview:labelView];
 
 Additional customization properties:
-     
+   
     @property (assign, nonatomic) CGFloat labelBorderWidth;
     @property (strong, nonatomic) UIColor *labelBackgroundColor;
     @property (strong, nonatomic) UIColor *labelTextColor;
     @property (strong, nonatomic) UIColor *textBorderColor;
-    
-    //set the below property before presenting the view controller. Otherwise it won't work 
     @property (assign, nonatomic) CGFloat triangleWidth;
+
+**Note:** Set the `triangleWidth` property before presenting the view controller. Otherwise it won't work.
 
 ##Third - Present a pop over with a string from an array of coordinates
 This is similar to the previous way of implementation with only the difference that instead of passing a view to display a string, you can pass an array of dictionaries containing coordinates and text for each label. 
@@ -74,4 +74,4 @@ This is similar to the previous way of implementation with only the difference t
 
     [self.view addSubview:labelView];
 
-The additional properties are same as above
+The additional properties are same as above.
