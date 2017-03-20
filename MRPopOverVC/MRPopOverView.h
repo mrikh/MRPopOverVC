@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MRPopOverViewDelegate <NSObject>
+
+@optional
+
+-(void)userDidDismissView;
+
+@end
+
 @interface MRPopOverView : UIView
 
 @property (assign, nonatomic) CGFloat labelBorderWidth;
@@ -19,6 +27,8 @@
 @property (strong, nonatomic) UIColor *labelTextColor;
 
 @property (strong, nonatomic) UIColor *textBorderColor;
+
+@property (weak, nonatomic) id<MRPopOverViewDelegate> delegate;
 
 -(void)createInfoBelowView:(UIView *)view withString:(NSString *)text andFont:(UIFont *)font;
 

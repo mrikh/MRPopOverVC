@@ -187,6 +187,11 @@
 
 -(void)handleTap:(UITapGestureRecognizer *)gestureRecognizer{
     
+    if([self.delegate respondsToSelector:@selector(userDidDismissView)]){
+        
+        [self.delegate userDidDismissView];
+    }
+    
     [self removeFromSuperview];
 }
 
