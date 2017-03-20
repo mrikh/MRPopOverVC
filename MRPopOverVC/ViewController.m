@@ -28,16 +28,16 @@
 }
 
 - (IBAction)buttonAction:(UIButton *)sender {
-    /*
+    
     UITableViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"table"];
     
     MRPopOverViewController *viewControllerNew = [[MRPopOverViewController alloc] initFromView:sender withViewController:viewController];
-    
+        
     [self presentViewController:viewControllerNew animated:YES completion:nil];
-    */
     
     
-   
+    
+   /*
     MRPopOverView *labelView = [[MRPopOverView alloc] init];
     
     labelView.labelBorderWidth = 1.0f;
@@ -54,7 +54,7 @@
 //    [labelView createInfoWithPointsAndTextDictionaryArray:@[[[NSDictionary alloc] initWithObjectsAndKeys:@"How ya doin?Heyyyyyy!",@"text",@(sender.center.x),@"xCoordinate", @(sender.center.y), @"yCoordinate",sender.superview,@"viewToBeMadeIn",nil]] andFont:nil];
     
     [self.view addSubview:labelView];
-    
+    */
 }
 
 @end
