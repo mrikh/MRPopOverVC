@@ -26,15 +26,16 @@ remaining height. If the view from which you wish to display the pop over is pre
     @property (strong, nonatomic) UIColor *colorOfBorder;
     @property (assign, nonatomic) CGFloat borderWidth;
     @property (assign, nonatomic) CGFloat cornerRadiusForPopOver;
-    @property (assign, nonatomic) UIEdgeInsets edgeInsets;
-    @property (assign, nonatomic) CGFloat triangleWidth;
-    @property (assign, nonatomic) NSNumber *totalHeight;
     @property (assign, nonatomic) CGFloat shadowRadius;
     @property (strong, nonatomic) UIColor *shadowColor;
     @property (assign, nonatomic) CGSize shadowOffset;
     @property (assign, nonatomic) CGFloat shadowOpacity;
 
-**Note:** Set the `triangleWidth`, `edgeInsets`, `totalHeight` properties before presenting the view controller. Otherwise it won't work as they cannot be modified at run time (yet?). 
+    @property (assign, nonatomic) UIEdgeInsets edgeInsets;
+    @property (assign, nonatomic) CGFloat triangleWidth;
+    @property (assign, nonatomic) NSNumber *totalHeight;
+
+**Note:** Set the `triangleWidth`, `edgeInsets`, `totalHeight` properties before presenting the view controller. Otherwise it won't work as they cannot be modified at run time(yet?).  You will have to recreate the pop over view controller if you want to change either of the 3 mentioed properties at run time after deallocation the previous instance :D.
 
 **Note:** If you add a total height, the pop over will ignore the edge inset of the side on which the popover is displayed. For example if the popover appears on top, the top edge inset will be ignored. 
 
